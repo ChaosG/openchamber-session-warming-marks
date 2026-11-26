@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Session Warming Marks</title>
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 16px;
+      font: 13px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--oc-text, #1f2328);
+      background: transparent;
+    }
+    h1 { font-size: 15px; margin: 0 0 4px; }
+    p { margin: 0 0 14px; color: var(--oc-muted, #6b7078); font-size: 12px; }
+    ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+    li { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border: 1px solid var(--oc-border, #e2e4e8); border-radius: 8px; }
+    .ic { width: 15px; height: 15px; flex: 0 0 15px; display: flex; }
+    .ic svg { width: 15px; height: 15px; }
+    .name { font-weight: 600; font-size: 12.5px; }
+    .hint { color: var(--oc-muted, #6b7078); font-size: 11.5px; }
+    .off { color: var(--oc-muted, #8a8f97); }
+    .on { color: #e8890c; }
+    .wait { color: var(--oc-muted, #8a8f97); }
+    .expired { color: #2f7cf6; }
+    footer { margin-top: 14px; font-size: 11.5px; color: var(--oc-muted, #6b7078); }
+  </style>
+</head>
+<body>
+  <h1>会话预热状态</h1>
+  <p>会话列表里的火焰图标由这个扩展维护，点击图标会打开本面板。</p>
+  <ul>
+    <li>
+      <span class="ic off"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 23C16.1421 23 19.5 19.6421 19.5 15.5C19.5 14.6345 19.2697 13.8032 19 13.0296C17.3333 14.6765 16.0667 15.5 15.2 15.5C19.1954 8.5 17 5.5 11 1.5C11.5 6.49951 8.20403 8.77375 6.86179 10.0366C5.40786 11.4045 4.5 13.3462 4.5 15.5C4.5 19.6421 7.85786 23 12 23ZM12.7094 5.23498C15.9511 7.98528 15.9666 10.1223 13.463 14.5086C12.702 15.8419 13.6648 17.5 15.2 17.5C15.8884 17.5 16.5841 17.2992 17.3189 16.9051C16.6979 19.262 14.5519 21 12 21C8.96243 21 6.5 18.5376 6.5 15.5C6.5 13.9608 7.13279 12.5276 8.23225 11.4932C8.35826 11.3747 8.99749 10.8081 9.02477 10.7836C9.44862 10.4021 9.7978 10.0663 10.1429 9.69677C11.3733 8.37932 12.2571 6.91631 12.7094 5.23498Z"/></svg></span>
+      <span><span class="name">未预热</span><br><span class="hint">空心火焰。这个会话没有开启保持预热。</span></span>
+    </li>
+    <li>
+      <span class="ic on"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 23C7.85786 23 4.5 19.6421 4.5 15.5C4.5 13.3462 5.40786 11.4045 6.86179 10.0366C8.20403 8.77375 11.5 6.49951 11 1.5C17 5.5 20 9.5 14 15.5C15 15.5 16.5 15.5 19 13.0296C19.2697 13.8032 19.5 14.6345 19.5 15.5C19.5 19.6421 16.1421 23 12 23Z"/></svg></span>
+      <span><span class="name">预热中</span><br><span class="hint">橙色实心火焰。正在按间隔发送预热请求。</span></span>
+    </li>
+    <li>
+      <span class="ic wait"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 23C7.85786 23 4.5 19.6421 4.5 15.5C4.5 13.3462 5.40786 11.4045 6.86179 10.0366C8.20403 8.77375 11.5 6.49951 11 1.5C17 5.5 20 9.5 14 15.5C15 15.5 16.5 15.5 19 13.0296C19.2697 13.8032 19.5 14.6345 19.5 15.5C19.5 19.6421 16.1421 23 12 23Z"/></svg></span>
+      <span><span class="name">等待开始</span><br><span class="hint">灰色实心火焰。会话正在回复，结束后开始预热。</span></span>
+    </li>
+    <li>
+      <span class="ic expired"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 23C7.85786 23 4.5 19.6421 4.5 15.5C4.5 13.3462 5.40786 11.4045 6.86179 10.0366C8.20403 8.77375 11.5 6.49951 11 1.5C17 5.5 20 9.5 14 15.5C15 15.5 16.5 15.5 19 13.0296C19.2697 13.8032 19.5 14.6345 19.5 15.5C19.5 19.6421 16.1421 23 12 23Z"/></svg></span>
+      <span><span class="name">已过期</span><br><span class="hint">蓝色实心火焰。预热窗口已过，下次回复后重新开始。</span></span>
+    </li>
+  </ul>
+  <footer>切换预热请用会话右键菜单里的“保持此会话预热 / 停止预热此会话”。</footer>
+  <script src="./main.js"></script>
+</body>
+</html>

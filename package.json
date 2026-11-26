@@ -1,0 +1,31 @@
+{
+  "name": "openchamber-session-warming-marks",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "OpenChamber extension: show session prompt-cache warming state as a flame mark on sidebar rows.",
+  "license": "MIT",
+  "openchamber": {
+    "apiVersion": 1,
+    "id": "session-warming-marks",
+    "name": "Session Warming Marks",
+    "icon": "icon.svg",
+    "engines": {
+      "openchamber": ">=2.7.1"
+    },
+    "contributes": {
+      "panel": {
+        "entry": "panel/index.html"
+      },
+      "service": {
+        "entry": "service/main.js",
+        "runtime": "host",
+        "keepRunning": true,
+        "provides": [
+          "opencode"
+        ]
+      },
+      "marks": true
+    }
+  }
+}
